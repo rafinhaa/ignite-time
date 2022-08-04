@@ -12,7 +12,8 @@ import {
   TaskInput,
   MinutesAmountInput,
 } from './styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { differenceInSeconds } from 'date-fns'
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
@@ -28,6 +29,7 @@ interface Cycle {
   id: string
   task: string
   minutesAmount: number
+  startDate: Date
 }
 
 export const Home = () => {
@@ -57,11 +59,22 @@ export const Home = () => {
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
+      startDate: new Date(),
     }
     setCycles((oldCycles) => [...oldCycles, newCycle])
     setActiveCycleId(id)
     reset()
   }
+
+  useEffect(() => {
+    if (!activeCycle) return
+    const interval = setInterval(() => {
+      setAmountSecondsPassed(
+        differenceInSeconds(new Date(), activeCycle.startDate),
+      )
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [activeCycle])
 
   return (
     <HomeContainer>
