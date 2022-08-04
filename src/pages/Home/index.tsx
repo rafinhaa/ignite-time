@@ -63,6 +63,7 @@ export const Home = () => {
     }
     setCycles((oldCycles) => [...oldCycles, newCycle])
     setActiveCycleId(id)
+    setAmountSecondsPassed(0)
     reset()
   }
 
@@ -75,6 +76,11 @@ export const Home = () => {
     }, 1000)
     return () => clearInterval(interval)
   }, [activeCycle])
+
+  useEffect(() => {
+    if (!activeCycle) return
+    document.title = `${minutes}:${seconds}`
+  }, [activeCycle, minutes, seconds])
 
   return (
     <HomeContainer>
