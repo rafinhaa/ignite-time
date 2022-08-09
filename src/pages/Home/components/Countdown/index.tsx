@@ -1,17 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { differenceInSeconds } from 'date-fns'
+
+import { CyclesContext } from '../..'
+
 import { CountdownContainer, Separator } from './styles'
 
-interface CountdownProps {
-  activeCycle: any
-  setCycles: any
-  activeCycleId: any
-}
+export const Countdown = () => {
+  const { activeCycle, activeCycleId, setCycles } = useContext(CyclesContext)
 
-export const Countdown = ({
-  activeCycle,
-  setCycles,
-  activeCycleId,
-}: CountdownProps) => {
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
   const totalSeconds = activeCycle ? activeCycle?.minutesAmount * 60 : 0
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
