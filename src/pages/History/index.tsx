@@ -21,10 +21,18 @@ export const History = () => {
             {cycles.map((cycle) => (
               <tr key={cycle.id}>
                 <td>{cycle.task}</td>
-                <td>1:00</td>
-                <td>há três dias</td>
+                <td>{cycle.minutesAmount} minutos</td>
+                <td>{cycle.startDate.toISOString()}</td>
                 <td>
-                  <Status statusColor="green">Concluído</Status>
+                  {cycle.finishedDate && (
+                    <Status statusColor="green">Concluído</Status>
+                  )}
+                  {cycle.interruptDate && (
+                    <Status statusColor="red">Interrompido</Status>
+                  )}
+                  {!cycle.finishedDate && !cycle.interruptDate && (
+                    <Status statusColor="yellow">Em andamento</Status>
+                  )}
                 </td>
               </tr>
             ))}
