@@ -55,7 +55,6 @@ export const CyclesContextProvider: React.FC<CyclesContextProviderProps> = ({
     setCycles((oldCycles) => [...oldCycles, newCycle])
     setActiveCycleId(id)
     setAmountSecondsPassed(0)
-    // reset()
   }
 
   const interruptCurrentCycle = () => {
