@@ -73,7 +73,20 @@ export const CyclesContextProvider: React.FC<CyclesContextProviderProps> = ({
             }),
             activeCycleId: null,
           }
-
+        case 'MARK_CURRENT_CYCLE_AS_FINISHED':
+          return {
+            ...state,
+            cycles: state.cycles.map((cycle) => {
+              if (cycle.id === state.activeCycleId) {
+                return {
+                  ...cycle,
+                  finishedDate: new Date(),
+                }
+              }
+              return cycle
+            }),
+            activeCycleId: null,
+          }
         default:
           return state
       }
@@ -93,7 +106,6 @@ export const CyclesContextProvider: React.FC<CyclesContextProviderProps> = ({
       startDate: new Date(),
     }
     dispatch({ type: 'ADD_NEW_CYCLE', payload: { newCycle } })
-    // setCycles((oldCycles) => [...oldCycles, newCycle])
     setAmountSecondsPassed(0)
   }
 
@@ -108,15 +120,6 @@ export const CyclesContextProvider: React.FC<CyclesContextProviderProps> = ({
         activeCycleId,
       },
     })
-    // setCycles((state) =>
-    //   state.map((cycle) => {
-    //     if (cycle.id === activeCycleId) {
-    //       return { ...cycle, finishedDate: new Date() }
-    //     } else {
-    //       return cycle
-    //     }
-    //   }),
-    // )
   }
 
   return (
