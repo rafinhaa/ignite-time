@@ -24,7 +24,6 @@ export const cyclesReducer = (state: CyclesState, action: any) => {
         draft.cycles[currentCycleIndex].interruptDate = new Date()
         draft.activeCycleId = null
       })
-
     case ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED:
       if (currentCycleIndex < 0) return state
       return produce(state, (draft) => {
