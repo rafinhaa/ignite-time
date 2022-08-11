@@ -1,15 +1,9 @@
-/* eslint-disable no-unused-vars */
-import { Cycle } from '../contexts/CyclesContext'
+import { Cycle } from '../../contexts/CyclesContext'
+import { ActionTypes } from './actions'
 
 interface CyclesState {
   cycles: Cycle[]
   activeCycleId: null | string
-}
-
-export enum ActionTypes {
-  ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
-  INTERRUPT_CURRENT_CYCLE = 'INTERRUPT_CURRENT_CYCLE',
-  MARK_CURRENT_CYCLE_AS_FINISHED = 'MARK_CURRENT_CYCLE_AS_FINISHED',
 }
 
 export const cyclesReducer = (state: CyclesState, action: any) => {
